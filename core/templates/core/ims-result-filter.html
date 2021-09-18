@@ -1,0 +1,93 @@
+ {% extends 'core/base.html' %}{% block body %}
+
+<div style="margin:20px">
+
+    <h3 style=" margin-bottom: 0;   text-decoration-line: underline;
+                    text-decoration-style: solid;">IMS Result</h4>
+        <div class="row">
+            <div class="col-sm-3">
+                <h3>Total: {{total}}</h3>
+            </div>
+            <div class="col-sm-3">
+                <h3>Qualified: {{comission_sim_count}}</h3>
+            </div>
+            <div class="col-sm-3">
+                <h3>Disqualified: {{disqualified}}</h3>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn-danger" style="width: 100%;" href="{% url 'export_result' %}">Export Result</a>
+            </div>
+
+        </div>
+
+</div>
+<!-- <h1>{{comission_sim1_count}}</h1>
+        <h1>{{comission_sim_def_count}}</h1> -->
+<table id="table_id" class="table table-striped" style="padding: 10px;">
+    <thead class="alert-primary ">
+        <tr>
+            <th style="text-align:center; vertical-align:middle;">id</th>
+            <th style="text-align:center; vertical-align:middle;">msisdn</th>
+
+            <th style="text-align:center; vertical-align:middle;">region</th>
+
+            <th style="text-align:center; vertical-align:middle;">product_code</th>
+            <th style="text-align:center; vertical-align:middle;">distributor_code</th>
+            <th style="text-align:center; vertical-align:middle;">dsr_code</th>
+            <th style="text-align:center; vertical-align:middle;">retailer_code</th>
+
+            <th style="text-align:center; vertical-align:middle;">activation_date</th>
+            <th style="text-align:center; vertical-align:middle;">lifting_date</th>
+            <th style="text-align:center; vertical-align:middle;">qcpass_date</th>
+            <th style="text-align:center; vertical-align:middle;">usage_date</th>
+
+            <th style="text-align:center; vertical-align:middle;">usage_value</th>
+            <th style="text-align:center; vertical-align:middle;">net_3g_usage_value</th>
+            <th style="text-align:center; vertical-align:middle;">net_4g_usage_value</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for item in comission_sim %}
+        <tr>
+            <td style="text-align:center; vertical-align:middle;">{{ item.id }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.msisdn }}</td>
+
+            <td style="text-align:center; vertical-align:middle;">{{ item.region }}</td>
+
+            <td style="text-align:center; vertical-align:middle;">{{ item.product_code }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.distributor_code }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.dsr_code }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.retailer_code }}</td>
+
+            <td style="text-align:center; vertical-align:middle;">{{ item.activation_date }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.lifting_date }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.qcpass_date }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.usage_date }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.usage_value }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.net_3g_usage_value }}</td>
+            <td style="text-align:center; vertical-align:middle;">{{ item.net_4g_usage_value }}</td>
+
+            {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+
+            <th>Rating</th>
+            <th>Create Date</th>
+            <th>Create by</th>
+            <th>Image</th>
+
+        </tr>
+    </tfoot>
+</table>
+</div>
+</div>
+{% endblock %}
+<!-- <script>
+        $(document).ready(function() { // Setup - add a text input to each footer cell $('#table_id tfoot th').each(function() { var title = $(this).text(); $(this).html('
+        <input type="text" placeholder="' + title + '" style="width: 160" />'); }); // DataTable var table = $('#table_id').dataTable({ initComplete: function() { // Apply the search this.api().columns().every(function() { var that = this; $('input',
+        this.footer()).on('keyup change clear', function() { if (that.search() !== this.value) { that .search(this.value) .draw(); } }); }); } }); });
+        </script> -->

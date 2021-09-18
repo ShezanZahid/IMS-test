@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}{% block body %}
+<h3 style=" margin-bottom: 0;   text-decoration-line: underline;
+                    text-decoration-style: solid;">Conditions For Comission: </h4>
+    <div style="padding: 20px; margin: 20px;">
+        <form action="{% url 'ims-result-filter' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Region :</label>
+                <select multiple class="form-control" name="region" style="height:250px">   
+                {% for item in regions %}
+                    <option value="{{ item.region }}">{{ item.region }}</option>
+                {% endfor %}
+            </select>
+            </div>
+
+            <div class="form-group">
+                <label>Product Code :</label>
+                <select multiple class="form-control" name="product_code" style="height:250px">  
+                {% for item in product_codes %}
+                    <option value="{{ item.product_code }}">{{ item.product_code }}</option>
+                {% endfor %}
+            </select>
+            </div>
+
+            <div class="form-group">
+                <label>Activation Date :</label>
+                <input type="date" name="active_start_date"> - <input type="date" name="active_end_date">
+            </div>
+
+            <div class="form-group">
+                <label>Lifting Date :</label>
+                <input type="date" name="lift_start_date"> - <input type="date" name="lift_end_date">
+            </div>
+
+            <div class="form-group">
+                <label>QC Pass Date :</label>
+                <input type="date" name="qcpass_start_date"> - <input type="date" name="qcpass_end_date">
+            </div>
+            <div class="form-group">
+                <label>QC Pass Days :</label>
+                <input type="number" step="0.01" name="qcpass_days_end">
+            </div>
+
+            <div class="form-group">
+                <label>Usage Date :</label>
+                <input type="date" name="usage_start_date"> - <input type="date" name="usage_end_date">
+            </div>
+            <div class="form-group">
+                <label>Usage Days :</label>
+                <input type="number" step="0.01" name="usage_days_start"> - <input type="number" step="0.01" name="usage_days_end">
+            </div>
+
+            <div class="form-group">
+                <label>Usage Value :</label>
+
+                <input type="number" step="0.01" name="usage_value_start"> - <input type="number" step="0.01" name="usage_value_end">
+            </div>
+            <div class="form-group">
+                <label>3G Usage Value:</label>
+                <input type="number" step="0.01" name="usage_3g_value_start"> - <input type="number" step="0.01" name="usage_3g_value_end">
+            </div>
+            <div class="form-group">
+                <label>4G Usage Value :</label>
+                <input type="number" step="0.01" name="usage_4g_value_start"> - <input type="number" step="0.01" name="usage_4g_value_end">
+            </div>
+
+            <button class="btn btn-danger" type=" submit ">Submit</button>
+        </form>
+    </div>
+    {% endblock %}
