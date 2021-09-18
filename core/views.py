@@ -109,10 +109,19 @@ def imsSetupFilter(request):
             item.remarks = "Usage days Range Not Matched"
 
         Result.objects.bulk_create(comission_sim_diff)
-
-    usage_value_start = request.POST.get('usage_value_start')
+        
+    tax_percentage_value=request.POST.get('tax_percentage_value')
+    if request.POST.get('tax_percentage_value'):
+        tax_percentage_value=int(request.POST.get('tax_percentage_value'))/100
+    else:
+        tax_percentage_value =0
+    print(tax_percentage_value)
+    
+    usage_value_start = request.POST.get('usage_value_start') 
     usage_value_end = request.POST.get('usage_value_end')
     if usage_value_start or  usage_value_end :
+        usage_value_start = int(usage_value_start)+ int(usage_value_start)*tax_percentage_value
+        usage_value_end = int(usage_value_end)+ int(usage_value_end)*tax_percentage_value
         comission_sim_beforchange=comission_sim
         comission_sim= comission_sim.filter(usage_value__gte=usage_value_start,usage_value__lte=usage_value_end)
         comission_sim_diff= comission_sim_beforchange.difference(comission_sim)
@@ -123,9 +132,11 @@ def imsSetupFilter(request):
     
    
 
-    usage_3g_value_start = request.POST.get('usage_3g_value_start')
-    usage_3g_value_end = request.POST.get('usage_3g_value_end')
+    usage_3g_value_start = request.POST.get('usage_3g_value_start') 
+    usage_3g_value_end = request.POST.get('usage_3g_value_end') 
     if usage_3g_value_start or  usage_3g_value_end :
+        usage_3g_value_start = int(usage_3g_value_start)+ int(usage_3g_value_start)*tax_percentage_value
+        usage_3g_value_end = int(usage_3g_value_end)+ int(usage_3g_value_end)*tax_percentage_value
         comission_sim_beforchange=comission_sim
         comission_sim= comission_sim.filter(net_3g_usage_value__gte=usage_3g_value_start,net_3g_usage_value__lte=usage_3g_value_end)
         comission_sim_diff= comission_sim_beforchange.difference(comission_sim)
@@ -134,9 +145,11 @@ def imsSetupFilter(request):
 
         Result.objects.bulk_create(comission_sim_diff)
     
-    usage_4g_value_start = request.POST.get('usage_4g_value_start')
-    usage_4g_value_end = request.POST.get('usage_4g_value_end')
+    usage_4g_value_start = request.POST.get('usage_4g_value_start') 
+    usage_4g_value_end = request.POST.get('usage_4g_value_end') 
     if usage_4g_value_start or  usage_4g_value_end :
+        usage_4g_value_start = int(usage_4g_value_start)+ int(usage_4g_value_start)*tax_percentage_value
+        usage_4g_value_end = int(usage_4g_value_end)+ int(usage_4g_value_end)*tax_percentage_value 
         comission_sim_beforchange=comission_sim
         comission_sim= comission_sim.filter(net_4g_usage_value__gte=usage_4g_value_start,net_4g_usage_value__lte=usage_4g_value_end)
         comission_sim_diff= comission_sim_beforchange.difference(comission_sim)
