@@ -1,1 +1,1 @@
-web: gunicorn ImsTesting.wsgih
+web: gunicorn ImsTesting.wsgi
